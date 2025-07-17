@@ -18,11 +18,21 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
             _context = context;
         }
 
-        public IList<TaskManagerDB> TaskManagerDB { get;set; } = default!;
+        public IList<TaskManagerDB> TaskManagerDB { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            TaskManagerDB = await _context.Tasks_Table.ToListAsync();
+            TaskManagerDB = await _context.Tasks_Table.Where(t => !t.Status).ToListAsync();
+        }
+        public async Task<IActionResult> OnPostCompletarAsync(int id)
+        {
+            var tarea = await _context.Tasks_Table.FindAsync(id);
+            if (tarea != null)
+            {
+                tarea.Status = true; // Cambiar a completada
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToPage("TareaCompletada");
         }
     }
 }

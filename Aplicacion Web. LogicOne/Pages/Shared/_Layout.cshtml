@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Aplicacion_Web._LogicOne.styles.css" asp-append-version="true" />
+    <!-- Añadir Bootstrap Icons CDN aquí para que los iconos funcionen en todas las páginas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
     <header>
@@ -19,9 +21,15 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <!-- Enlace a Tareas Pendientes (tu página principal de tareas) -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/TaskRoom/Index">Tareas Pendientes</a>
                         </li>
+                        <!-- Nuevo enlace para Tareas Completadas -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/TaskRoom/TareaCompletada">Tareas Completadas</a>
+                        </li>
+                        <!-- Mantener el enlace de Privacidad si lo necesitas -->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
