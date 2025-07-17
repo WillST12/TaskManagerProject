@@ -10,7 +10,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<TaskContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+//COMENTARIO DE PRUEBA PARA EL COMMIT
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
