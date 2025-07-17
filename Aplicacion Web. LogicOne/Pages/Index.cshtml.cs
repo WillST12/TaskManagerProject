@@ -12,9 +12,9 @@ namespace Aplicacion_Web._LogicOne.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return RedirectToPage("/TaskRoom/Index");
         }
     }
 }

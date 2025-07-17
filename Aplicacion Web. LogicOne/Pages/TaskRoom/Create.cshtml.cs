@@ -33,6 +33,7 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
             {
                 return Page();
             }
+            TaskManagerDB.FechaCreacion = DateTime.Now;
 
             _context.Tasks_Table.Add(TaskManagerDB);
             await _context.SaveChangesAsync();

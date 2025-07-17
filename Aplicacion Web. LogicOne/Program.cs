@@ -31,5 +31,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.MapFallbackToPage("/TaskRoom/Index");
+
 app.Run();
 

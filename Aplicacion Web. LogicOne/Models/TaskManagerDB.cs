@@ -4,14 +4,20 @@ namespace Aplicacion_Web._LogicOne.Models
 {
     public class TaskManagerDB
     {
-       
+      
         public int ID { get; set; }
+        [Required(ErrorMessage = "Debe colocar un titulo")]
         [Display(Name = "Titulo De Tarea")]
+
         public string? TitleTask { get; set; }
+        [Required(ErrorMessage = "Coloca alguna descripcion")]
         [Display(Name = "Descripcion")]
         public string? DescriptionTask { get; set; }
-        [Display(Name = "Estado (Completado/Pendiente)")]
+        [Display(Name = "Estado")]
         public bool Status { get; set; }
+        [Display(Name = "Fecha")]
+        [DataType(DataType.Date)]
+        public DateTime FechaCreacion { get; set; }
 
     }
 }
