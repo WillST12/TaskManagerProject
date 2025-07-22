@@ -19,6 +19,7 @@ namespace Aplicacion_Web._LogicOne.Models
         [DataType(DataType.Date)]
         public DateTime FechaCreacion { get; set; }
         [Display(Name = "FechaLimite")]
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime FechaLimite { get; set; }
 

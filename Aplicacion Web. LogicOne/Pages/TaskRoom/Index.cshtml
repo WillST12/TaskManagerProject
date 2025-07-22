@@ -2,101 +2,73 @@
 @model Aplicacion_Web._LogicOne.Pages.TaskRoom.IndexModel
 
 @{
-    ViewData["Title"] = "Tareas ";
+    ViewData["Title"] = "Tareas";
 }
-<style>
-    .badge-vencido {
-        background-color:coral;
-        
-    }
-</style>
-<h1>Tareas</h1>
+
+<h1 class="mb-4 text-primary">Mis Tareas</h1>
 
 <p>
-    <a asp-page="Create" class="btn btn-primary">Crear Nueva Tarea</a>
+    <a asp-page="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle-fill"></i> Nueva Tarea
+    </a>
 </p>
 
 @if (!Model.TaskManagerDB.Any())
 {
     <div class="alert alert-info" role="alert">
-       No tienes tareas pendientes.
+        No tienes tareas pendientes.
     </div>
 }
 else
 {
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TaskManagerDB[0].TitleTask)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TaskManagerDB[0].DescriptionTask)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.TaskManagerDB[0].Status)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TaskManagerDB[0].FechaCreacion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TaskManagerDB[0].FechaLimite)
-                </th>
-                <th class="text-center">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.TaskManagerDB)
-            {
-                <tr>
-                    <td>
-                        <strong>@Html.DisplayFor(modelItem => item.TitleTask)</strong>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DescriptionTask)
-                    </td>
-                    <td class="text-center">
-                        @if (item.Status)
-                        {
-                            <span class="badge bg-success">Completada </span>
-                        }
-                        else if(!item.Status && item.FechaLimite < DateTime.Now)
-                        {
-                            <span class="badge badge-vencido text-dark">Vencida</span>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var item in Model.TaskManagerDB)
+        {
+            var estado = item.Status ? "Completada"
+            : item.FechaLimite < DateTime.Now ? "Vencida"
+            : "Pendiente";
 
-                        } else if(!item.Status)
-                        {
-                            <span class="badge bg-warning text-dark">Pendiente</span>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaCreacion)
-                    </td>
-                    <td class="text-center">
-                        <form method="post" asp-page-handler="Completar" asp-route-id="@item.ID" style="display:inline;">
-                            <button type="submit" class="btn btn-success btn-sm" title="Marcar como Completada">
-                                <i class="bi bi-check-circle-fill"></i> Completar
-                            </button>
-                        </form>
-                        | <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-info btn-sm" title="Editar Tarea">
-                            <i class="bi bi-pencil-fill"></i> Editar
-                        </a>
-                        | <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-secondary btn-sm" title="Ver Detalles">
-                            <i class="bi bi-info-circle-fill"></i> Detalles
-                        </a>
-                        | <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm" title="Eliminar Tarea">
-                            <i class="bi bi-trash-fill"></i> Eliminar
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            var badgeClass = item.Status ? "success"
+            : item.FechaLimite < DateTime.Now ? "danger"
+            : "warning text-dark";
+
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.TitleTask</h5>
+                        <p class="card-text">@item.DescriptionTask</p>
+
+                        <span class="badge bg-@badgeClass mb-2">@estado</span>
+
+                        <p class="mb-1"><strong>Creada:</strong> @item.FechaCreacion.ToString("dd/MM/yyyy hh:mm tt")</p>
+                        <p class="mb-3"><strong>Vence:</strong> @item.FechaLimite.ToString("dd/MM/yyyy hh:mm tt")</p>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <form method="post" asp-page-handler="Completar" asp-route-id="@item.ID">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="bi bi-check-circle-fill"></i> Completar
+                                </button>
+                            </form>
+
+                            <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-info btn-sm">
+                                <i class="bi bi-pencil-fill"></i> Editar
+                            </a>
+
+                            <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-secondary btn-sm">
+                                <i class="bi bi-info-circle-fill"></i> Detalles
+                            </a>
+
+                            <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash-fill"></i> Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 }
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 }
