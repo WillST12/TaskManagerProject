@@ -11,7 +11,7 @@
 @if (!Model.TaskManagerDB.Any())
 {
     <div class="alert alert-info" role="alert">
-        🎉 ¡Aún no tienes tareas completadas! ¡Es hora de ponerte a trabajar!
+       Aun no tienes tareas completadas. ¡Es hora de ponerte a trabajar!
     </div>
 }
 else
@@ -72,6 +72,7 @@ else
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    @* Asegúrate de que Bootstrap Icons esté incluido en tu proyecto, si no, puedes añadirlo aquí o en _Layout.cshtml *@
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
 }

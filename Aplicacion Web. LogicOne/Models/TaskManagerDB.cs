@@ -15,9 +15,12 @@ namespace Aplicacion_Web._LogicOne.Models
         public string? DescriptionTask { get; set; }
         [Display(Name = "Estado")]
         public bool Status { get; set; }
-        [Display(Name = "Fecha")]
+        [Display(Name = "FechaInicial")]
         [DataType(DataType.Date)]
         public DateTime FechaCreacion { get; set; }
+        [Display(Name = "FechaLimite")]
+        [DataType(DataType.Date)]
+        public DateTime FechaLimite { get; set; }
 
     }
 }

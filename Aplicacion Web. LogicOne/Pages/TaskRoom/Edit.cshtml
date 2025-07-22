@@ -24,10 +24,10 @@
                 <input asp-for="TaskManagerDB.DescriptionTask" class="form-control" />
                 <span asp-validation-for="TaskManagerDB.DescriptionTask" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="TaskManagerDB.Status" /> @Html.DisplayNameFor(model => model.TaskManagerDB.Status)
-                </label>
+            <div class="mb-3">
+                <label class="form-check-label" asp-for="TaskManagerDB.FechaLimite"></label>
+                <input class="form-check-input" asp-for="TaskManagerDB.FechaLimite" type="datetime-local" />
+                <span asp-validation-for="TaskManagerDB.FechaLimite" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" />

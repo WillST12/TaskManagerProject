@@ -4,7 +4,12 @@
 @{
     ViewData["Title"] = "Tareas ";
 }
-
+<style>
+    .badge-vencido {
+        background-color:coral;
+        
+    }
+</style>
 <h1>Tareas</h1>
 
 <p>
@@ -34,6 +39,9 @@ else
                 <th>
                     @Html.DisplayNameFor(model => model.TaskManagerDB[0].FechaCreacion)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskManagerDB[0].FechaLimite)
+                </th>
                 <th class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -52,9 +60,13 @@ else
                         {
                             <span class="badge bg-success">Completada </span>
                         }
-                        else
+                        else if(!item.Status && item.FechaLimite < DateTime.Now)
                         {
-                            <span class="badge bg-warning text-dark">Pendiente </span>
+                            <span class="badge badge-vencido text-dark">Vencida</span>
+
+                        } else if(!item.Status)
+                        {
+                            <span class="badge bg-warning text-dark">Pendiente</span>
                         }
                     </td>
                     <td>
@@ -86,5 +98,5 @@ else
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 }

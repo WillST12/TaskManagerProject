@@ -47,6 +47,17 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
                 return Page();
             }
 
+            var existingTask = await _context.Tasks_Table.AsNoTracking()
+                .FirstOrDefaultAsync(t => t.ID == TaskManagerDB.ID);
+
+            if (existingTask == null)
+            {
+                return NotFound();
+            }
+
+            // Preservar la FechaInicial
+            TaskManagerDB.FechaCreacion = existingTask.FechaCreacion;
+
             _context.Attach(TaskManagerDB).State = EntityState.Modified;
 
             try
@@ -67,6 +78,7 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
 
             return RedirectToPage("./Index");
         }
+
 
         private bool TaskManagerDBExists(int id)
         {
