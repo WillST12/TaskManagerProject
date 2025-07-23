@@ -16,6 +16,7 @@ namespace Aplicacion_Web._LogicOne.Models
         [Display(Name = "Estado")]
         public bool Status { get; set; }
         [Display(Name = "FechaInicial")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime FechaCreacion { get; set; }
         [Display(Name = "FechaLimite")]
