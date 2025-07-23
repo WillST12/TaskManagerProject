@@ -16,19 +16,20 @@
 
                 <div class="mb-3">
                     <label asp-for="TaskManagerDB.TitleTask" class="form-label">Título</label>
-                    <input asp-for="TaskManagerDB.TitleTask" class="form-control" placeholder="Escribe el título de la tarea" />
+                    <input asp-for="TaskManagerDB.TitleTask" class="form-control" placeholder="Titulo" />
                     <span asp-validation-for="TaskManagerDB.TitleTask" class="text-danger"></span>
                 </div>
-
+               
                 <div class="mb-3">
                     <label asp-for="TaskManagerDB.DescriptionTask" class="form-label">Descripción</label>
-                    <textarea asp-for="TaskManagerDB.DescriptionTask" class="form-control" rows="3" placeholder="Describe brevemente la tarea"></textarea>
+                    <textarea id="textarea" asp-for="TaskManagerDB.DescriptionTask" class="form-control" rows="3" placeholder="Descripcion" ></textarea>
                     <span asp-validation-for="TaskManagerDB.DescriptionTask" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="TaskManagerDB.FechaLimite" class="form-label">Fecha Límite</label>
-                    <input asp-for="TaskManagerDB.FechaLimite" type="datetime-local" class="form-control" />
+                    <input asp-for="TaskManagerDB.FechaLimite" type="datetime-local" class="form-control"
+                           value="@Model.TaskManagerDB.FechaLimite.ToString("yyyy-MM-ddTHH:mm")" />
                     <span asp-validation-for="TaskManagerDB.FechaLimite" class="text-danger"></span>
                 </div>
 
@@ -41,10 +42,33 @@
     </div>
 </div>
 
+<style>
+    textarea {
+        overflow:hidden;
+        margin: 40px auto;
+        display: block;
+    }
+</style>
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script>
+        var textarea = document.getElementById('textarea');
+
+        textarea.addEventListener('input', function () {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+       
+        window.addEventListener('DOMContentLoaded', function () {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        });
+    </script>
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        
     }
 }

@@ -38,8 +38,7 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -56,8 +55,8 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
             }
 
             // Preservar la FechaInicial
-            TaskManagerDB.FechaCreacion = existingTask.FechaCreacion;
-
+           // TaskManagerDB.FechaCreacion = existingTask.FechaCreacion;
+            TaskManagerDB.FechaLimite = existingTask.FechaLimite;
             _context.Attach(TaskManagerDB).State = EntityState.Modified;
 
             try
