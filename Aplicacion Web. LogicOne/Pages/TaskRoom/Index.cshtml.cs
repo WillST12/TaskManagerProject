@@ -13,17 +13,28 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
     {
         private readonly Aplicacion_Web._LogicOne.Models.TaskContext _context;
 
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
+
+        public IList<TaskManagerDB> TaskManagerDB { get; set; } = default!;
+
         public IndexModel(Aplicacion_Web._LogicOne.Models.TaskContext context)
         {
             _context = context;
         }
 
-        public IList<TaskManagerDB> TaskManagerDB { get; set; } = default!;
-
         public async Task OnGetAsync()
         {
-            TaskManagerDB = await _context.Tasks_Table.Where(t => !t.Status).ToListAsync();
+            var query = _context.Tasks_Table.Where(t => !t.Status);
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                query = query.Where(t => t.TitleTask.Contains(SearchString));
+            }
+
+            TaskManagerDB = await query.ToListAsync();
         }
+
         public async Task<IActionResult> OnPostCompletarAsync(int id)
         {
             var tarea = await _context.Tasks_Table.FindAsync(id);

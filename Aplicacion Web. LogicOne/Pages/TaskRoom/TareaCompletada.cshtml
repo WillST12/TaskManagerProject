@@ -7,7 +7,7 @@
 
 <h1 >Tareas Completadas</h1>
 
-@* Verifica si hay tareas completadas para mostrar un mensaje apropiado *@
+
 @if (!Model.TaskManagerDB.Any())
 {
     <div class="alert alert-info" role="alert">
@@ -16,11 +16,12 @@
 }
 else
 {
-    @* Tabla para mostrar las tareas completadas con estilos de Bootstrap *@
-    <table class="table table-hover table-striped">
+
+    <table class="table table-hover table-striped bg-white shadow rounded">
+
         <thead>
             <tr>
-                <th>
+                <th width="15%">
                     @Html.DisplayNameFor(model => model.TaskManagerDB[0].TitleTask)
                 </th>
                 <th>
@@ -56,8 +57,8 @@ else
                        
                         <form method="post" asp-page-handler="Delete" asp-route-id="@item.ID" style="display:inline;">
                          
-                            <button type="button" class="btn btn-danger  " data-toggle="modal" data-target="#exampleModal">
-                                Eliminar
+                            <button type="button" class="btn btn-danger btn-md  " data-toggle="modal" data-target="#exampleModal">
+                                <p>Eliminar</p>
                             </button>
 
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,7 +71,7 @@ else
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>¡No podras remover esta accion!</p>
+                                            <p> Ojo ¡No podras remover esta accion!</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
