@@ -30,7 +30,7 @@ else
                     @Html.DisplayNameFor(model => model.TaskManagerDB[0].Status)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TaskManagerDB[0].FechaCreacion)
+                   Finalizacion
                 </th>
                 <th class="text-center">Acciones</th> 
             </tr>
@@ -50,17 +50,12 @@ else
                         <span class="badge bg-success">Completada ✅</span>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FechaCreacion)
+                        @Html.DisplayFor(modelItem => item.FechaLimite)
                     </td>
                     <td class="text-center">
                        
                         <form method="post" asp-page-handler="Delete" asp-route-id="@item.ID" style="display:inline;">
-                           @*  <div class="modal" tabindex="-1">
-                                <button type="submit" class="btn btn-danger btn-sm" title="Eliminar Tarea"
-                                        onclick="return confirm('¿Estás seguro de que quieres eliminar esta tarea?');">
-                                    <i class="bi bi-trash-fill"></i> Eliminar
-                                </button>
-                            </div>  *@
+                         
                             <button type="button" class="btn btn-danger  " data-toggle="modal" data-target="#exampleModal">
                                 Eliminar
                             </button>
@@ -80,7 +75,7 @@ else
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                             <div>
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Eliminar Tarea"
+                                                <button type="submit" class="btn btn-danger btn-md" title="Eliminar Tarea"
                                                        ;">
                                                     Eliminar
                                                 </button>
