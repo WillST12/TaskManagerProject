@@ -2,43 +2,43 @@
 @model Aplicacion_Web._LogicOne.Pages.TaskRoom.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nueva tarea";
 }
 
-<h1>Nueva tarea</h1>
+<h1 class="mb-4">Nueva tarea</h1>
 
-<h4>TaskManagerDB</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TaskManagerDB.TitleTask" class="control-label"></label>
-                <input asp-for="TaskManagerDB.TitleTask" class="form-control" />
-                <span asp-validation-for="TaskManagerDB.TitleTask" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TaskManagerDB.DescriptionTask" class="control-label"></label>
-                <input asp-for="TaskManagerDB.DescriptionTask" class="form-control" />
-                <span asp-validation-for="TaskManagerDB.DescriptionTask" class="text-danger"></span>
-            </div>
-           <div class="mb-3">
-                <label class="form-check-label" asp-for="TaskManagerDB.FechaLimite"></label>
-                <input class="form-check-input" asp-for="TaskManagerDB.FechaLimite" type="datetime-local" />
-                <span asp-validation-for="TaskManagerDB.FechaLimite" class="text-danger"></span>
-            </div> 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="TaskManagerDB.TitleTask" class="form-label"></label>
+            <input asp-for="TaskManagerDB.TitleTask" class="form-control" />
+            <span asp-validation-for="TaskManagerDB.TitleTask" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="TaskManagerDB.DescriptionTask" class="form-label"></label>
+            <input asp-for="TaskManagerDB.DescriptionTask" class="form-control" />
+            <span asp-validation-for="TaskManagerDB.DescriptionTask" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="TaskManagerDB.FechaLimite" class="form-label"></label>
+            <input asp-for="TaskManagerDB.FechaLimite" type="datetime-local" class="form-control" />
+            <span asp-validation-for="TaskManagerDB.FechaLimite" class="text-danger"></span>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a asp-page="Index" class="btn btn-secondary ms-2">Cancelar</a>
+    </div>
+</form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 }
