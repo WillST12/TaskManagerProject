@@ -55,8 +55,9 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
             }
 
             // Preservar la FechaInicial
-           // TaskManagerDB.FechaCreacion = existingTask.FechaCreacion;
-            TaskManagerDB.FechaLimite = existingTask.FechaLimite;
+            TaskManagerDB.FechaCreacion = existingTask.FechaCreacion;
+          // Forza que se mantenga igual la fechaLimite
+          //TaskManagerDB.FechaLimite = existingTask.FechaLimite;
             _context.Attach(TaskManagerDB).State = EntityState.Modified;
 
             try
