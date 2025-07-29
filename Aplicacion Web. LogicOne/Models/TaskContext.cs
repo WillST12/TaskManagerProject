@@ -10,6 +10,13 @@ namespace Aplicacion_Web._LogicOne.Models
         {
             
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<TaskManagerDB>()
+                .Property(t => t.EstadoTarea)
+                .HasConversion<string>();
 
+        }
     }
 }

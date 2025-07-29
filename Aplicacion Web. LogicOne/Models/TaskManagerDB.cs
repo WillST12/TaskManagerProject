@@ -2,6 +2,13 @@
 
 namespace Aplicacion_Web._LogicOne.Models
 {
+
+    public enum Status_Homework
+    {
+        Pendiente,
+        Completado,
+        Vencido
+    }
     public class TaskManagerDB
     {
       
@@ -23,6 +30,7 @@ namespace Aplicacion_Web._LogicOne.Models
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy HH:mm tt}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime FechaLimite { get; set; }
-
+        [Display(Name = "EstadoTarea")]
+        public Status_Homework EstadoTarea { get; set; }
     }
 }
