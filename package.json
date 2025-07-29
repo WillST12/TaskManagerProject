@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@floating-ui/react": "^0.27.14",
+    "@popperjs/core": "^2.11.8"
+  }
+}
