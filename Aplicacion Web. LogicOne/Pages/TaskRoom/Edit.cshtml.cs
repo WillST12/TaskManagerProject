@@ -45,7 +45,18 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
             {
                 return Page();
             }
-
+            if (TaskManagerDB.EstadoTarea == Status_Homework.Completado)
+            {
+                // Si ya se marca como completada, no tocar nada
+            }
+            else if (TaskManagerDB.FechaLimite < DateTime.Now)
+            {
+                TaskManagerDB.EstadoTarea = Models.Status_Homework.Vencido;
+            }
+            else
+            {
+                TaskManagerDB.EstadoTarea = Status_Homework.Pendiente;
+            }
             var existingTask = await _context.Tasks_Table.AsNoTracking()
                 .FirstOrDefaultAsync(t => t.ID == TaskManagerDB.ID);
 

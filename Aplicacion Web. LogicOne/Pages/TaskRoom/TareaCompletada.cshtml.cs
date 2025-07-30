@@ -25,10 +25,11 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
         // Método que se ejecuta al cargar la página (GET request)
         public async Task OnGetAsync()
         {
-            // Filtra y obtiene solo las tareas donde Status es true (completadas)
+
             TaskManagerDB = await _context.Tasks_Table
-                .Where(t => t.Status) // Filtra por tareas con Status = true
-                .ToListAsync(); // Convierte los resultados a una lista asíncronamente
+            .Where(t => t.EstadoTarea == Models.Status_Homework.Completado)
+            .ToListAsync();
+
         }
 
         // Nuevo método para eliminar una tarea (POST request)

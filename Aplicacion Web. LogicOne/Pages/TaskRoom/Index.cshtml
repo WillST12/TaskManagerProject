@@ -5,8 +5,6 @@
     ViewData["Title"] = "Tareas";
 }
 
-
-
 <h1 class="mb-4 text-primary">Mis Tareas</h1>
 
 <p>
@@ -26,13 +24,13 @@ else
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach (var item in Model.TaskManagerDB)
         {
-            var estado = item.Status ? "Completada"
-            : item.FechaLimite < DateTime.Now ? "Vencida"
-            : "Pendiente";
-
-            var badgeClass = item.Status ? "success"
-            : item.FechaLimite < DateTime.Now ? "danger"
-            : "warning text-dark";
+            var badgeClass = item.EstadoTarea switch
+            {
+                Models.Status_Homework.Completado => "success",
+                Models.Status_Homework.Vencido => "danger",
+                Models.Status_Homework.Pendiente => "warning text-dark",
+                _ => "secondary"
+            };
 
             <div class="col">
                 <div class="card shadow-sm h-100">
@@ -40,7 +38,7 @@ else
                         <h5 class="card-title">@item.TitleTask</h5>
                         <p class="card-text">@item.DescriptionTask</p>
 
-                        <span class="badge bg-@badgeClass mb-2">@estado</span>
+                        <span class="badge bg-@badgeClass mb-2">@item.EstadoTarea</span>
 
                         <p class="mb-1"><strong>Creada:</strong> @item.FechaCreacion.ToString("dd/MM/yyyy hh:mm tt")</p>
                         <p class="mb-3"><strong>Vence:</strong> @item.FechaLimite.ToString("dd/MM/yyyy hh:mm tt")</p>
@@ -74,5 +72,4 @@ else
 @section Scripts {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 }

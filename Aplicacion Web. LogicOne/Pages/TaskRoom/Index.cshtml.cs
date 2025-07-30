@@ -25,7 +25,7 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
 
         public async Task OnGetAsync()
         {
-            var query = _context.Tasks_Table.Where(t => !t.Status);
+            var query = _context.Tasks_Table.Where(t => t.EstadoTarea != Status_Homework.Completado);
 
             if (!string.IsNullOrEmpty(SearchString))
             {
@@ -38,12 +38,13 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
         public async Task<IActionResult> OnPostCompletarAsync(int id)
         {
             var tarea = await _context.Tasks_Table.FindAsync(id);
-            if (tarea != null)
+            if (tarea == null)
             {
-                tarea.Status = true; // Cambiar a completada
-                await _context.SaveChangesAsync();
+               return NotFound();
             }
-            return RedirectToPage("TareaCompletada");
+            tarea.EstadoTarea = Models.Status_Homework.Completado;
+            await _context.SaveChangesAsync();
+            return RedirectToPage("/TaskRoom/TareaCompletada");
         }
     }
 }

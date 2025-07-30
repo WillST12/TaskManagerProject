@@ -33,12 +33,58 @@ namespace Aplicacion_Web._LogicOne.Pages.TaskRoom
             {
                 return Page();
             }
+
+            if (TaskManagerDB.EstadoTarea == Status_Homework.Completado)
+            {
+                // Si ya se marca como completada, no tocar nada
+            }
+            else if (TaskManagerDB.FechaLimite < DateTime.Now)
+            {
+                TaskManagerDB.EstadoTarea = Models.Status_Homework.Vencido;
+            }
+            else
+            {
+                TaskManagerDB.EstadoTarea = Status_Homework.Pendiente;
+            }
             TaskManagerDB.FechaCreacion = DateTime.Now;
 
             _context.Tasks_Table.Add(TaskManagerDB);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+
+            
         }
     }
+    /*
+     public async Task<IActionResult> OnPostAsync()
+{
+    if (!ModelState.IsValid)
+    {
+        return Page();
+    }
+
+    // Asignar estado automáticamente
+    if (TaskManagerDB.Status == Status_Homework.Completado)
+    {
+        // Si ya se marca como completada, no tocar nada
+    }
+    else if (TaskManagerDB.FechaLimite < DateTime.Now)
+    {
+        TaskManagerDB.Status = Status_Homework.Vencido;
+    }
+    else
+    {
+        TaskManagerDB.Status = Status_Homework.Pendiente;
+    }
+
+    TaskManagerDB.FechaCreacion = DateTime.Now;
+
+    _context.TaskManagerDB.Add(TaskManagerDB);
+    await _context.SaveChangesAsync();
+
+    return RedirectToPage("./Index");
+}
+
+     */
 }
